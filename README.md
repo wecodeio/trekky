@@ -49,7 +49,7 @@ The site will be rendered in two directories, one for each language, with the 'l
     usage: trekky [-h] [-s source] [-t target]
 
 
-## Deamon mode
+## Daemon mode
 
 Monitors source dir for changes, and copy/process on demand to target dir. 
     
