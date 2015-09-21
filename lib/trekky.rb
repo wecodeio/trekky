@@ -2,6 +2,7 @@ require 'fileutils'
 require_relative 'trekky/context'
 
 class Trekky
+  @@locales = [""]
 
   def initialize(source_dir)
     @context = Context.new(source_dir)
@@ -12,16 +13,28 @@ class Trekky
     end
   end
 
+  def self.locales
+    @@locales
+  end
+  def self.locales=(value)
+    @@locales = value
+  end
+
   def render_to(target_dir)
     target_dir = Pathname.new(target_dir).expand_path
 
-    @context.each_source do |source|
-      path = target_path(target_dir, source)
-      output = source.render
-      output = source.render_errors unless source.valid?
-      STDOUT.puts "Writing #{source.path} to #{path}"
-      write(output, path)
-    end
+    Trekky.locales.each{ |locale| 
+      ENV['locale'] = locale.to_s
+      @context.each_source do |source|
+        current_target_dir = target_dir
+        current_target_dir += locale.to_s + "/" if type = source.type and locale != ""
+        path = target_path(current_target_dir, source)
+        output = source.render
+        output = source.render_errors unless source.valid?
+        STDOUT.puts "Writing #{source.path} to #{path}"
+        write(output, path)
+      end
+    }
   end
 
   private

@@ -33,6 +33,16 @@ You'll end up having this:
     └── stylesheets
         └── hola.css
 
+## Multi-locale support
+
+If you put this on config.rb: 
+
+    Trekky.locales = [:en, :es]
+
+The site will be rendered in two directories, one for each language, with the 'locale' env variable loaded up, so you can do something like this:
+
+    ENV['locale'] == "en"
+
 ## HELP
 
     trekky  -h
