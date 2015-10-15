@@ -9,19 +9,19 @@ Gem::Specification.new do |s|
   s.email             = ["lucasefe@gmail.com"]
   s.homepage          = "http://github.com/lucasefe/trekky"
   s.files             = [
-                          "README.md", 
-                          "bin/trekky", 
-                          "lib/trekky.rb", 
-                          "lib/trekky/context.rb", 
-                          "lib/trekky/data.rb", 
-                          "lib/trekky/haml_source.rb", 
-                          "lib/trekky/sass_source.rb", 
-                          "lib/trekky/source.rb", 
+                          "README.md",
+                          "bin/trekky",
+                          "lib/trekky.rb",
+                          "lib/trekky/context.rb",
+                          "lib/trekky/data.rb",
+                          "lib/trekky/haml_source.rb",
+                          "lib/trekky/sass_source.rb",
+                          "lib/trekky/source.rb",
                           "lib/trekky/static_source.rb" ]
   s.license           = "MIT"
   s.executables.push('trekky')
   s.add_dependency 'clap', '~> 1.0'
   s.add_dependency 'sass', '~> 3.3'
   s.add_dependency 'haml', '~> 4.0'
-  s.add_dependency 'rb-fsevent', '~> 0.9'
+  s.add_dependency 'listen', '~> 3.0'
 end

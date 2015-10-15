@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 require 'clap'
-require 'rb-fsevent'
+require 'listen'
 require_relative '../lib/trekky'
 
 source = 'source'
 target = 'public'
 daemon = false
 
-Clap.run ARGV, 
+Clap.run ARGV,
   "-s" => lambda {|s| source = s },
   "-t" => lambda {|t| target = t },
   "-d" => lambda { daemon = true },
@@ -19,16 +19,16 @@ Clap.run ARGV,
 
 trekky = Trekky.new(source)
 
-unless daemon 
+unless daemon
   trekky.render_to(target)
 else
   STDOUT.puts "-> Initial run (daemon mode)"
   trekky.render_to(target)
-  fsevent = FSEvent.new
-  # TODO: Use yielded directories to only process some changes files, and not the whole source dir. 
-  fsevent.watch(source) do 
+  # TODO: Use yielded directories to only process some changes files, and not the whole source dir.
+  listener = Listen.to(source, 'data') do |modified, added, removed|
     trekky.render_to(target)
     STDOUT.puts "-> Done processing. "
   end
-  fsevent.run
+  listener.start # not blocking
+  sleep
 end
