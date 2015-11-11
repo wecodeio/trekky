@@ -1,4 +1,5 @@
-# encoding: utf-8
+# -*- encoding: utf-8 -*-
+# stub: trekky 0.0.7.rc3 ruby lib
 
 Gem::Specification.new do |s|
   s.name              = "trekky"
