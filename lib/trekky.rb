@@ -27,7 +27,7 @@ class Trekky
       ENV['locale'] = locale.to_s
       @context.each_source do |source|
         current_target_dir = target_dir
-        current_target_dir += locale.to_s + "/" if type = source.type and locale != ""
+        current_target_dir += locale.to_s + "/" if source.type == "sass" and locale != ""
         path = target_path(current_target_dir, source)
         output = source.render
         output = source.render_errors unless source.valid?
